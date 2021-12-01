@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="FundLibs\QuatMath\quat.h" />
+    <ClInclude Include="FundLibs\QuatMath\quaternion.h" />
+    <ClInclude Include="FundLibs\QuatMath\QuatThinks.h" />
+    <ClInclude Include="FundLibs\ShRendCPU\DrawBuffer.h" />
+    <ClInclude Include="FundLibs\ShRendCPU\ShWin.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="FundLibs\QuatMath\quaternion.cpp" />
+    <ClCompile Include="FundLibs\QuatMath\QuatThinks.cpp" />
+    <ClCompile Include="FundLibs\ShRendCPU\DrawBuffer.cpp" />
+    <ClCompile Include="FundLibs\ShRendCPU\ShWin.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+</Project>
