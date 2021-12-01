@@ -6,7 +6,7 @@
 #define ScrHH 512.0f
 #define MaxRenderL 16384
 #define RefrIter 5
-#define SkyCol quat(1, 1, 1)
+#define SkyCol quat(0.6, 0.8, 0.9)
 
 class MainRenderer : public ShWinRendCPU {
     quat spherePos[4] = {
@@ -73,7 +73,7 @@ class MainRenderer : public ShWinRendCPU {
             free = false;
         }
 
-        if (lMax == MaxRenderL)
+        if (lMax >= MaxRenderL)
             return SkyCol - _1;
         else {
             *ro += *rd * (lMax - 0.01);
@@ -93,9 +93,13 @@ class MainRenderer : public ShWinRendCPU {
             col.i_ *= itCol.i_;
             col.j_ *= itCol.j_;
             col.k_ *= itCol.k_;
-            if (itCol.d_ != 0)
+            if (itCol.d_ < 0)
                 break;
         }
+
+        col.i_ = pow(col.i_, 1/2.2);
+        col.j_ = pow(col.j_, 1/2.2);
+        col.k_ = pow(col.k_, 1/2.2);
 
         return color(255 * col.i_, 255 * col.j_, 255 * col.k_);
     }
@@ -106,10 +110,10 @@ class MainRenderer : public ShWinRendCPU {
         for (int i = 0; i < db.GetW(); ++i)
             for (int j = 0; j < db.GetH(); ++j) {
                 quat uv( 2 * i / ScrWW - 1, 2 * j / ScrHH - 1, 0);
-                quat ro = p + uv / 2 + _k*6;
+                quat ro = p + uv / 2 + _k*3;
                 quat rd = n(uv/2-_k);
-                db.DrawPixel(i, j, traceRay(ro, rd));
-                //db.DrawPixelHalf(0.5f, i, j, traceRay(ro, rd));
+                //db.DrawPixel(i, j, traceRay(ro, rd));
+                db.DrawPixelHalf(0.4f, i, j, traceRay(ro, rd));
             }
     }
 
