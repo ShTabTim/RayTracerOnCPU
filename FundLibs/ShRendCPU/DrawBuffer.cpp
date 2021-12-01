@@ -63,10 +63,23 @@ void DB::Clip(int &x, int &y) {
 	if (y > h) y = h;
 }
 
+void DB::Draw4Pixel(int x, int y, color col) {
+	DrawPixel(x*2  , y*2  , col);
+	DrawPixel(x*2+1, y*2  , col);
+	DrawPixel(x*2  , y*2+1, col);
+	DrawPixel(x*2+1, y*2+1 , col);
+}
+
 void DB::DrawPixel(int x, int y, color col) {
 	if (x >= 0 && x < w && y >= 0 && y < h) {
 		DrawCharOnBuffer(y * w + x, col);
 	}
+}
+void DB::Draw4PixelHalf(float FH, int x, int y, color col) {
+	DrawPixelHalf(FH, x * 2, y * 2, col);
+	DrawPixelHalf(FH, x * 2 + 1, y * 2, col);
+	DrawPixelHalf(FH, x * 2, y * 2 + 1, col);
+	DrawPixelHalf(FH, x * 2 + 1, y * 2 + 1, col);
 }
 void DB::DrawPixelHalf(float FH, int x, int y, color col) {
 	if (x >= 0 && x < w && y >= 0 && y < h) {

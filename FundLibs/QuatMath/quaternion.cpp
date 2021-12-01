@@ -9,15 +9,17 @@ quat quat::operator - () {return quat(-d_, -i_, -j_, -k_);}
 quat quat::operator + (quat const& o) {return quat(d_ + o.d_, i_ + o.i_, j_ + o.j_, k_ + o.k_);}
 quat quat::operator - (quat const& o) {return quat(d_ - o.d_, i_ - o.i_, j_ - o.j_, k_ - o.k_);}
 quat quat::operator += (quat const& o) {
-	//*this = *this + o;
 	d_ += o.d_;
 	i_ += o.i_;
 	j_ += o.j_;
 	k_ += o.k_;
 	return *this;
 }
+quat quat::operator &&(quat const& o) {
+	return quat(d_*o.d_, i_ * o.i_, j_ * o.j_, k_*o.k_);
+}
+
 quat quat::operator -= (quat const& o) {
-	//*this = *this - o;
 	d_ -= o.d_;
 	i_ -= o.i_;
 	j_ -= o.j_;

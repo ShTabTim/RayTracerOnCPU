@@ -18,7 +18,7 @@ typedef struct quat {
 	quat operator += (quat const& other);
 	quat operator -= (quat const& other);
 	quat operator * (quat const& other);
-	float operator &(quat const& other);
+	quat operator &&(quat const& other);
 	quat operator / (qType const& other);
 	quat Re();
 	quat Im();
