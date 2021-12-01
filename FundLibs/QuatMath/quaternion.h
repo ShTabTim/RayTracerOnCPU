@@ -1,7 +1,7 @@
 #pragma once
 #define _1 quat(1)
-#define _i quat(1, 0)
-#define _j quat(0, 1)
+#define _i quat(1, 0, 0)
+#define _j quat(0, 1, 0)
 #define _k quat(0, 0, 1)
 
 #define qType float

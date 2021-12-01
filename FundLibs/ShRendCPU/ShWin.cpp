@@ -151,7 +151,7 @@ void ShWinRendCPU::Rend() {
 				break;
 
 			wchar_t s[64];
-			swprintf_s(s, 64, L"ConsoleRenderer - %s - FPS: %5.2f", AppName.c_str(), 1.0f / dt);
+			swprintf_s(s, 64, L"%s - FPS: %5.2f", AppName.c_str(), 1.0f / dt);
 
 			SetWindowText(hWnd, s);
 
