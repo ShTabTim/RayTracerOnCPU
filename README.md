@@ -1,2 +1,2 @@
 # Ray tracer on CPU
-![image](https://user-images.githubusercontent.com/85260208/144321356-8ffddf80-4139-4fb2-9ed2-07e952ef2559.png)
+![p1](https://user-images.githubusercontent.com/85260208/144408419-512a0ccb-f746-4bb9-a12a-b4f6c8558c0e.png)
