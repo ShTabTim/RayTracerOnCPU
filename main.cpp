@@ -1,18 +1,25 @@
 #include <Windows.h>
 #include "FundLibs/ShRendCPU/ShWin.h"
 #include "FundLibs/QuatMath/quat.h"
+#include "Renderer.h"
 
 #define ScrWW 256.0f
 #define ScrHH 256.0f
 #define MaxRenderL 16384
-#define EyeInertia 0.2
-#define TraceSamples 2
+#define TraceSamples 60
 #define RefrIter 5
 #define SkyCol quat(0.5, 0.7, 0.9)
 #define DefOldCol quat(0.1, 0.1, 0.1)
-//#define DefOldCol quat(0.01, 0.01, 0.01)
 
-class MainRenderer : public ShWinRendCPU {
+void updCam(quat* rx, quat* ry, quat* pos, float dt) {
+    //static float t = 0;
+    //t += dt/4;
+    //*ry = RQ(t, quat(0, 1, 0));
+    //*rx = RQ(-t, quat(1, 0, 0));
+    //*pos += quat(0, 0, -0.4f) * dt;
+}
+
+class MainRenderer : public RayTracer {
     quat spherePos[4] = {
         quat(0, 0, 1),
         quat(1, 0, 1),
@@ -20,45 +27,19 @@ class MainRenderer : public ShWinRendCPU {
         quat(1, 1, 1),
     };
 
-    typedef struct t2f {
-        float i, j;
-        t2f(float i = -1, float j = -1) : i(i), j(j) {}
-    }t2f;
-
-    t2f sphere(quat ro, quat rd, float r) {
-        float b = (ro * rd).d_;
-        float h = b * b + (ro * ro).d_ + r * r;
-        if (h < 0.0) return t2f();
-        h = sqrt(h);
-        return t2f(b - h, b + h);
-    }
-
-    float plane(quat ro, quat rd, quat p, float w) {
-        return -((ro*p).d_ - w) / (rd * p).d_;
-    }
-
     bool initSim() {
         AppName = L"RTCPU";
-
+        cam.init(updCam);
         return true;
     }
 
-    float dot(quat a, quat b) {
-        return a.i_ * b.i_ + a.j_ * b.j_ + a.k_ * b.k_;
-    }
-
-    quat reflect(quat rd, quat norm) { return rd + norm * 2 * (norm* rd).d_; }
-
     quat lSp = quat(5, 5, 0);
-
-    //quat castRay(quat ro, quat rd, int iter);
 
     quat castRay(quat ro, quat rd, int iter) {
         if (iter == 0)
             return DefOldCol;
         else {
             quat col(0);
-            //float albed = 1, diff = 1;
             bool free = true;
             float l = MaxRenderL, lMax = MaxRenderL;
             quat norm(0, 1, 0);
@@ -69,12 +50,11 @@ class MainRenderer : public ShWinRendCPU {
                     col = sp;
                     norm = n(ro + rd * l - sp);
                     lMax = l;
-                    //albed = (rand() % 5) / 10.0f + 0.5f;
                     free = false;
                 }
             }
 
-            l = plane(ro, rd, n(quat(0.1, 1, 0)), 0);
+            l = plane(ro, rd, n(quat(0.1, 1, 0)), 0).i;
             if (l > 0 && l < lMax) {
                 lMax = l;
                 col = quat(1, 1, 0);
@@ -111,26 +91,16 @@ class MainRenderer : public ShWinRendCPU {
         return color(255 * col.i_, 255 * col.j_, 255 * col.k_);
     }
 
-    void rend(float dt) {
-        static quat q(0, 0, 0), p(1, 0, 0), g = RQ(0.2f , n(quat(1, 1, 1)));
-        p = !g * p * g;
+    void rend() {
         for (int i = 0; i < ScrWW; i++)
             for (int j = 0; j < ScrHH; j++) {
                 quat uv( 2 * i / ScrWW - 1, 2 * j / ScrHH - 1, 0);
-                quat ro = p + uv / 2 - _k*7 + _j;
-                quat rd = n(uv/2+_k);
-#ifndef EyeInertia
-                db.Draw2Pixel(i, j, traceRay(ro, rd));
-#else
+                quat ro = cam.pos + !cam.ry*(!cam.rx*(uv / 2)*cam.rx)*cam.ry;
+                quat rd = !cam.ry * n((!cam.rx * (uv / 2 + _k) * cam.rx) * cam.ry);
                 db.Draw4PixelHalf(EyeInertia, i, j, traceRay(ro, rd));
-#endif
             }
     }
 
-    bool loopSim(float dt) {
-        rend(dt);
-        return true;
-    }
     bool finitSim() {
         return true;
     }

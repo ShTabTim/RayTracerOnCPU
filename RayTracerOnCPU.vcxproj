@@ -144,6 +144,7 @@
     <ClInclude Include="FundLibs\QuatMath\QuatThinks.h" />
     <ClInclude Include="FundLibs\ShRendCPU\DrawBuffer.h" />
     <ClInclude Include="FundLibs\ShRendCPU\ShWin.h" />
+    <ClInclude Include="Renderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FundLibs\QuatMath\quaternion.cpp" />

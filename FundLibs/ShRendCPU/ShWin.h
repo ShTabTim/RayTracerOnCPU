@@ -38,6 +38,7 @@ typedef struct ShWinRendCPU {
 private:
 	void Rend();
 protected:
+
 	DB db;
 
 	HWND hWnd;
@@ -68,6 +69,7 @@ protected:
 	int m_mousePosX;
 	int m_mousePosY;
 public:
+
 	bool init(HINSTANCE hInst, int W, int H, WNDPROC WndProc);
 	void Start();
 
