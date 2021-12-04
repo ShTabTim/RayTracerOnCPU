@@ -3,12 +3,12 @@
 #include "FundLibs/HyCoMath/hyco.h"
 #include "Renderer.h"
 
-#define ScrWW 128.0f
-#define ScrHH 128.0f
+#define ScrWW 512.0f
+#define ScrHH 512.0f
 #define MaxRenderL 16384
-#define TraceSamples 5
-#define RefrIter 6
-#define SkyCol puco(0.5, 0.7, 0.9)
+#define TraceSamples 80
+#define RefrIter 20
+#define SkyCol puco(0.4, 0.6, 0.7)
 #define DefOldCol puco(0.1, 0.1, 0.1)
 
 enum material {
@@ -25,9 +25,9 @@ typedef struct body {
 }body;
 
 void updCam(hyco* rx, hyco* ry, puco* pos, float dt) {
-    static float t = -2;
-    t += dt/2;
-    *ry = hyco(sin(t/4), 0, cos(t/4), 0);
+    //static float t = -2;
+    //t += dt/2;
+    //*ry = hyco(sin(t/4), 0, cos(t/4), 0);
     //*rx = RQ(-t, puco(1, 0, 0));
     //*pos += puco(0, 0, -0.4f) * dt;
 }
@@ -72,7 +72,7 @@ class MainRenderer : public RayTracer {
             bod->col = puco(1, 1, 0.8);
             bod->norm = _j;
             bod->lMax = l;
-            bod->mat = mirror;
+            bod->mat = diffuse;
         }
 
         l = plane(ro - puco(-2, 4, 2), rd, _i).i;
@@ -80,7 +80,7 @@ class MainRenderer : public RayTracer {
             bod->col = puco(1, 1, 0.2);
             bod->norm = _i;
             bod->lMax = l;
-            bod->mat = diffuse;
+            bod->mat = mirror;
         }
 
         l = sphere(ro - lSp, rd, 2).i;

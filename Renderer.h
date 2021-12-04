@@ -7,8 +7,8 @@ private:
     void (*fncUpd)(hyco*, hyco*, puco*, float) = 0;
 public:
     hyco rx = RQ(0, puco(1, 0, 0));
-    hyco ry = RQ(0, puco(0, 1, 0));
-    puco pos = puco(1, 1, -7);
+    hyco ry = RQ(0.1, puco(0, 1, 0));
+    puco pos = puco(0, 1, -7);
 
     void init(void (*fncUpd)(hyco*, hyco*, puco*, float)) {
         this->fncUpd = fncUpd;
