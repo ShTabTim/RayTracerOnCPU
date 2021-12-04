@@ -139,16 +139,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="FundLibs\QuatMath\quat.h" />
-    <ClInclude Include="FundLibs\QuatMath\quaternion.h" />
-    <ClInclude Include="FundLibs\QuatMath\QuatThinks.h" />
+    <ClInclude Include="FundLibs\HyCoMath\hyco.h" />
+    <ClInclude Include="FundLibs\HyCoMath\HyperComplex.h" />
+    <ClInclude Include="FundLibs\HyCoMath\HyCoThinks.h" />
     <ClInclude Include="FundLibs\ShRendCPU\DrawBuffer.h" />
     <ClInclude Include="FundLibs\ShRendCPU\ShWin.h" />
     <ClInclude Include="Renderer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="FundLibs\QuatMath\quaternion.cpp" />
-    <ClCompile Include="FundLibs\QuatMath\QuatThinks.cpp" />
+    <ClCompile Include="FundLibs\HyCoMath\HyperComplex.cpp" />
+    <ClCompile Include="FundLibs\HyCoMath\HyCoThinks.cpp" />
     <ClCompile Include="FundLibs\ShRendCPU\DrawBuffer.cpp" />
     <ClCompile Include="FundLibs\ShRendCPU\ShWin.cpp" />
     <ClCompile Include="main.cpp" />
