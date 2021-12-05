@@ -35,6 +35,8 @@ public:
 	void Draw4Pixel(int x, int y, color col = { 0, 0, 0 });
 	void DrawPixelHalf(float firstHalfint, int x, int y, color col = { 0, 0, 0 });
 	void Draw4PixelHalf(float firstHalfint, int x, int y, color col = { 0, 0, 0 });
+	void Draw16PixelHalf(float firstHalfint, int x, int y, color col = { 0, 0, 0 });
+	void Draw256PixelHalf(float firstHalfint, int x, int y, color col = { 0, 0, 0 });
 	void DrawLine(int x1, int y1, int x2, int y2, color col = {0, 0, 0});
 
 	void DrawTriangle(int x1, int y1, int x2, int y2, int x3, int y3, color col = {0, 0, 0});

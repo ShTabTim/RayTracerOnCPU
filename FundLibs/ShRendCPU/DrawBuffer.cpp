@@ -81,6 +81,18 @@ void DB::Draw4PixelHalf(float FH, int x, int y, color col) {
 	DrawPixelHalf(FH, x * 2, y * 2 + 1, col);
 	DrawPixelHalf(FH, x * 2 + 1, y * 2 + 1, col);
 }
+void DB::Draw16PixelHalf(float FH, int x, int y, color col) {
+	Draw4PixelHalf(FH, x * 2, y * 2, col);
+	Draw4PixelHalf(FH, x * 2 + 1, y * 2, col);
+	Draw4PixelHalf(FH, x * 2, y * 2 + 1, col);
+	Draw4PixelHalf(FH, x * 2 + 1, y * 2 + 1, col);
+}
+void DB::Draw256PixelHalf(float FH, int x, int y, color col) {
+	Draw16PixelHalf(FH, x * 2, y * 2, col);
+	Draw16PixelHalf(FH, x * 2 + 1, y * 2, col);
+	Draw16PixelHalf(FH, x * 2, y * 2 + 1, col);
+	Draw16PixelHalf(FH, x * 2 + 1, y * 2 + 1, col);
+}
 void DB::DrawPixelHalf(float FH, int x, int y, color col) {
 	if (x >= 0 && x < w && y >= 0 && y < h) {
 		DrawCharOnBufferHalf(FH, y * w + x, col);
