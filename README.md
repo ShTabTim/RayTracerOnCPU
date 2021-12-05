@@ -1,2 +1,2 @@
 # Ray tracer on CPU
-![](https://user-images.githubusercontent.com/85260208/144720513-00c2a4aa-63d5-43cc-b7ed-c28e80002a2b.png)
+![RTCPU - FPS_ 481 26 05 12 2021 18_52_06](https://user-images.githubusercontent.com/85260208/144753759-0d28c766-2350-4193-a4b4-0c222d4c1dde.png)
